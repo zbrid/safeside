@@ -5,6 +5,9 @@
 # and Chocolatey all provided at least 3.5.1 as well.
 cmake_minimum_required(VERSION 3.5.1)
 
+set(CMAKE_C_COMPILER "/usr/local/google/home/zbrid/sanitizer/llvm-specfuzz/llvm-7.0.1/build/bin/clang")
+set(CMAKE_CXX_COMPILER "/usr/local/google/home/zbrid/sanitizer/llvm-specfuzz/llvm-7.0.1/build/bin/clang++")
+
 project(safeside VERSION 0.1.0 LANGUAGES C CXX)
 
 # Use C++11 without extensions

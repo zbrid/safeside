@@ -133,6 +133,14 @@ endfunction()
 # Spectre V1 PHT SA -- mistraining PHT in the same address space
 add_demo(spectre_v1_pht_sa)
 
+# Spectre V1 PHT SA with SpecFuzz enabled
+add_executable(spectre_v1_pht_sa_specfuzz spectre_v1_pht_sa.cc)
+# Enable SpecFuzz (assumes we are using the SpecFuzz patched compiler)
+# -O3 - not sure why, but it matches what SpecFuzz does
+# -g - for debug info which is used in the SpecFuzz reports, I think
+target_compile_options(spectre_v1_pht_sa_specfuzz PUBLIC -O3 -fsanitize=address -g)
+target_link_libraries(spectre_v1_pht_sa_specfuzz safeside)
+
 # Spectre V1 BTB SA -- mistraining BTB in the same address space
 add_demo(spectre_v1_btb_sa)
 
