@@ -1,0 +1,27 @@
+llc: /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/Target/X86/SpecFuzzPass.cpp:604: bool {anonymous}::X86SpecFuzzPass::visitWrite(llvm::MachineInstr&, llvm::MachineBasicBlock&): Assertion `MemRefBegin >= 0 && "Not a write instruction"' failed.
+Stack dump:
+0.	Program arguments: /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/build/bin/llc -x86-specfuzz -disable-tail-calls -O3 timing_array.sf.bc -o timing_array.sf.s 
+1.	Running pass 'Function Pass Manager' on module 'timing_array.sf.bc'.
+2.	Running pass 'SpecFuzz' on function '@_ZN11TimingArray14FlushFromCacheEv'
+#0 0x00007f59f0c05cae llvm::sys::PrintStackTrace(llvm::raw_ostream&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/Support/Unix/Signals.inc:490:22
+#1 0x00007f59f0c05d41 PrintStackTraceSignalHandler(void*) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/Support/Unix/Signals.inc:554:1
+#2 0x00007f59f0c03d73 llvm::sys::RunSignalHandlers() /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/Support/Signals.cpp:67:20
+#3 0x00007f59f0c05773 SignalHandler(int) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/Support/Unix/Signals.inc:353:1
+#4 0x00007f59f05b5e30 (/lib/x86_64-linux-gnu/libc.so.6+0x3be30)
+#5 0x00007f59f05b5db1 gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x3bdb1)
+#6 0x00007f59f059f537 abort (/lib/x86_64-linux-gnu/libc.so.6+0x25537)
+#7 0x00007f59f059f40f __tls_get_addr (/lib/x86_64-linux-gnu/libc.so.6+0x2540f)
+#8 0x00007f59f05ae5b2 (/lib/x86_64-linux-gnu/libc.so.6+0x345b2)
+#9 0x00007f59f520b240 (anonymous namespace)::X86SpecFuzzPass::visitWrite(llvm::MachineInstr&, llvm::MachineBasicBlock&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/Target/X86/SpecFuzzPass.cpp:605:41
+#10 0x00007f59f5209ae3 (anonymous namespace)::X86SpecFuzzPass::visitFunction(llvm::MachineFunction&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/Target/X86/SpecFuzzPass.cpp:283:26
+#11 0x00007f59f52095f3 (anonymous namespace)::X86SpecFuzzPass::runOnMachineFunction(llvm::MachineFunction&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/Target/X86/SpecFuzzPass.cpp:223:25
+#12 0x00007f59f382f1ab llvm::MachineFunctionPass::runOnFunction(llvm::Function&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/CodeGen/MachineFunctionPass.cpp:61:33
+#13 0x00007f59f1115f53 llvm::FPPassManager::runOnFunction(llvm::Function&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/IR/LegacyPassManager.cpp:1586:20
+#14 0x00007f59f111610c llvm::FPPassManager::runOnModule(llvm::Module&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/IR/LegacyPassManager.cpp:1609:13
+#15 0x00007f59f11164d3 (anonymous namespace)::MPPassManager::runOnModule(llvm::Module&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/IR/LegacyPassManager.cpp:1669:20
+#16 0x00007f59f1116c46 llvm::legacy::PassManagerImpl::run(llvm::Module&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/IR/LegacyPassManager.cpp:1774:13
+#17 0x00007f59f1116e7b llvm::legacy::PassManager::run(llvm::Module&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/lib/IR/LegacyPassManager.cpp:1806:1
+#18 0x00005630b03569bd compileModule(char**, llvm::LLVMContext&) /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/tools/llc/llc.cpp:600:66
+#19 0x00005630b0354cca main /usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/src/tools/llc/llc.cpp:351:35
+#20 0x00007f59f05a0cca __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x26cca)
+#21 0x00005630b0352baa _start (/usr/local/google/home/zbrid/sanitizer/llvm-install/llvm-7.0.1/build/bin/llc+0x28baa)
